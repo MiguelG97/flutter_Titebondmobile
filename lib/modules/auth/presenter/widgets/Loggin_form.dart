@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
+import 'package:mobile/modules/store/presenter/screens/home_screen.dart';
 
 class LogginForm extends StatelessWidget {
   LogginForm({
@@ -120,7 +121,13 @@ class LogginForm extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return HomeScreen();
+                      },
+                    ));
+                  },
                   child: Text(
                     "Sign in",
                     style: GoogleFonts.raleway(
