@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mobile/core/theme/themes.dart';
 import 'package:mobile/modules/auth/presenter/screens/onboarding_screen.dart';
 import 'package:mobile/modules/home_screen.dart';
 
@@ -15,6 +16,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: MThemes.lightTheme,
+      darkTheme: MThemes.darkTheme,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: OnboardingScreen(),
     );

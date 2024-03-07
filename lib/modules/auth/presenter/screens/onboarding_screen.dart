@@ -4,6 +4,7 @@ import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_events.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_states.dart';
+import 'package:mobile/modules/auth/presenter/screens/login_screen.dart';
 import 'package:mobile/modules/auth/presenter/widgets/CustomClipper_Onboard.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -91,7 +92,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             height: 6,
                           ),
                           Text(
-                            "Search and filter products from the best glue wood supplier to find the matching one for your business",
+                            Constants.onboardingSubtitles[
+                                currentState.currentPageIndex],
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
@@ -112,7 +114,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           child: FilledButton(
                             onPressed: () {
                               if (currentState.currentPageIndex ==
-                                  Constants.onboardingTitles.length - 1) return;
+                                  Constants.onboardingTitles.length - 1) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return Loggin_Screen();
+                                    },
+                                  ),
+                                );
+                                return;
+                              }
                               bloc.add(OnboardpageHasChanged(
                                   pageIndex:
                                       currentState.currentPageIndex + 1));
