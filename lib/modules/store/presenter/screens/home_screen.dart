@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.symmetric(horizontal: 20),
               width: screenSize.width,
               height: screenSize.height,
-              color: Color(0xffF7F7F9), //Color(0xffF7F7F9)
+              color: MColors.secondary_100, //Color(0xffF7F7F9)
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -201,7 +201,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: MColors.iconDark),
                     ),
                     SizedBox(height: Constants.spaceBtwItems / 2),
-                    SizedBox(
+                    Container(
+                      color: MColors.secondary_100,
                       height: 50,
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -214,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   MaterialTapTargetSize.shrinkWrap,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8)),
-                              label: SizedBox(
+                              label: Container(
                                   width: 100,
                                   height: 40,
                                   child: Center(
@@ -237,102 +238,122 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     SizedBox(height: Constants.spaceBtwItems),
                     Expanded(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisExtent: 201,
-                            crossAxisSpacing: Constants.spaceBtwItems * 1,
-                            mainAxisSpacing: Constants.spaceBtwItems),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-                            // width: 157,
-                            // height: 201,
-                            decoration: BoxDecoration(
-                              color: MColors.white,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Stack(clipBehavior: Clip.none, children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    width: double.infinity,
-                                    height: 97,
-                                    child: Image(
-                                      fit: BoxFit.contain,
-                                      image: NetworkImage(
-                                          "http://imagecenter.titebond.com/Woodworking/TBOriginal/TB%20Original%2032oz.jpg"),
-                                    ),
-                                  ),
+                      child: Container(
+                        color: MColors.secondary_100,
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisExtent: 201,
+                                  crossAxisSpacing: Constants.spaceBtwItems / 2,
+                                  mainAxisSpacing: Constants.spaceBtwItems),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 14, right: 10),
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                // width: 157,
+                                // height: 201,
+
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 4,
+                                        offset: Offset(0, 4),
+                                        spreadRadius: 0,
+                                        color: Colors.black.withOpacity(0.04))
+                                  ],
+                                  color: MColors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child:
+                                    Stack(clipBehavior: Clip.none, children: [
                                   Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Best Seller",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: const Color(0xff1372fd)),
-                                      ),
-                                      SizedBox(
-                                        height: Constants.spaceBtwItems / 10,
-                                      ),
-                                      Text(
-                                        "Nike Jordan",
-                                        style: GoogleFonts.raleway(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: MColors.iconDark_100,
+                                      const SizedBox(
+                                        width: double.infinity,
+                                        height: 97,
+                                        child: Image(
+                                          fit: BoxFit.contain,
+                                          image: NetworkImage(
+                                              "http://imagecenter.titebond.com/Woodworking/TBOriginal/TB%20Original%2032oz.jpg"),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: Constants.spaceBtwItems / 4,
-                                      ),
-                                      Text(
-                                        "\$752.00",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14,
-                                            color: MColors.iconDark,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Best Seller",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: const Color(0xff1372fd)),
+                                          ),
+                                          SizedBox(
+                                            height:
+                                                Constants.spaceBtwItems / 10,
+                                          ),
+                                          Text(
+                                            "Nike Jordan",
+                                            style: GoogleFonts.raleway(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                              color: MColors.iconDark_100,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: Constants.spaceBtwItems / 4,
+                                          ),
+                                          Text(
+                                            "\$752.00",
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                color: MColors.iconDark,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          )
+                                        ],
                                       )
                                     ],
+                                  ),
+                                  Positioned(
+                                    right: -20,
+                                    bottom: 0,
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                        color: MColors.bluePrimay,
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(8),
+                                          bottomRight: Radius.circular(8),
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "+",
+                                          style: TextStyle(
+                                              color: MColors.white,
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w300),
+                                        ),
+                                      ),
+                                    ),
                                   )
-                                ],
+                                ]),
                               ),
-                              Positioned(
-                                right: -20,
-                                bottom: 0,
-                                child: Container(
-                                  width: 24,
-                                  height: 24,
-                                  decoration: BoxDecoration(
-                                    color: MColors.bluePrimay,
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(8),
-                                      bottomRight: Radius.circular(8),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "+",
-                                      style: TextStyle(
-                                          color: MColors.white,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w300),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ]),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     )
                   ]),
