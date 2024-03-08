@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/shared/widgets/MIconButton.dart';
+import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/presenter/widgets/BottomNavigation_Clipper.dart';
 
 class MBottomNavigationBar extends StatelessWidget {
@@ -30,11 +31,11 @@ class MBottomNavigationBar extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                             blurRadius: 24,
-                            color: Color(0xff0D6EFD).withOpacity(0.6),
+                            color: MColors.primary.withOpacity(0.6),
                             offset: Offset(0, 8)),
                       ],
                       borderRadius: BorderRadius.circular(100),
-                      color: Color(0xff0D6EFD)),
+                      color: MColors.primary),
                   width: 56,
                   height: 56,
                   child: IconButton(
@@ -42,7 +43,7 @@ class MBottomNavigationBar extends StatelessWidget {
                     icon: Icon(
                       Symbols.shopping_bag,
                       size: 25,
-                      color: Color(0xffFFFFFF),
+                      color: MColors.iconDark,
                     ),
                   ),
                 ),

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:mobile/core/shared/constants/constants.dart';
+import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/presenter/widgets/BottomNavBar.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,29 +19,189 @@ class _HomeScreenState extends State<HomeScreen> {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       // appBar: AppBar(title: Text("data")),
-      backgroundColor: Color(0xffF7F7F9), //Color(0xffF7F7F9)
-      body: CustomScrollView(shrinkWrap: true, slivers: [
-        SliverAppBar(pinned: true, expandedHeight: 320),
-        SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-          return Container(
-            width: screenSize.width,
-            height: screenSize.height,
-            color: Color(0xffF7F7F9), //Color(0xffF7F7F9)
-            child: Column(children: [Text("data")]),
-          );
-        }, childCount: 1))
-      ]),
+      backgroundColor: MColors.secondary_100, //Color(0xffF7F7F9)
+      body: SafeArea(
+        child: CustomScrollView(shrinkWrap: true, slivers: [
+          SliverAppBar(
+            // clipBehavior: Clip.none,
+            primary: true,
+            floating: true,
+            collapsedHeight: 80,
+            toolbarHeight: 80,
+            backgroundColor: MColors.secondary_100,
+            pinned: true,
+            expandedHeight: 400,
+            elevation: 0,
+            leading: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Symbols.menu,
+                  size: 25,
+                  color: MColors.iconDark,
+                )),
+            centerTitle: true,
+            title: Image.asset("assets/logo/TITEBOND-02-gkl.png",
+                height: 80, fit: BoxFit.contain),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Center(
+                  child: Container(
+                    height: 44, //not working!
+                    width: 44,
+                    decoration: BoxDecoration(
+                        color: MColors.white,
+                        borderRadius: BorderRadius.circular(40)),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.shopping_bag,
+                          fill: 1,
+                          color: MColors.iconDark,
+                        )),
+                  ),
+                ),
+              )
+            ],
+            flexibleSpace: FlexibleSpaceBar.createSettings(
+              // minExtent: 0,
+              // maxExtent: 230,
+              toolbarOpacity: 1,
+              currentExtent: 0,
+              child: FlexibleSpaceBar(
+                titlePadding: EdgeInsetsDirectional.only(bottom: 20, top: 80),
+                collapseMode: CollapseMode.pin,
+                stretchModes: [StretchMode.blurBackground],
+                title: SizedBox(
+                  width: screenSize.width,
+                  child: SingleChildScrollView(
+                    reverse: true,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //1) search bar
+                          Text(
+                            "search bar",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          //2) carousel
+                          Container(
+                            color: Colors.green,
+                            height: 220,
+                            child: Stack(children: [
+                              SizedBox(
+                                height: 220,
+                                child: Image.asset(
+                                  "assets/images/log-trunks-pile-sawn.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 30),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        MColors.primary,
+                                        Colors.transparent
+                                      ],
+                                      begin: Alignment.centerLeft,
+                                      stops: [0.2, 1],
+                                      end: Alignment.centerRight),
+                                ),
+                                height: 220,
+                                width: screenSize.width,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Explore new \narrivals with us!",
+                                        maxLines: 2,
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w700,
+                                            color: MColors.iconDark),
+                                      ),
+                                      SizedBox(
+                                        height: Constants.spaceBtwItems / 6,
+                                      ),
+                                      Text(
+                                        "Get discounts up to 75% for \n glue wood products",
+                                        maxLines: 2,
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: MColors.iconDark),
+                                      ),
+                                      SizedBox(
+                                        height: Constants.spaceBtwItems / 2,
+                                      ),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: MColors.white,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          42))),
+                                          onPressed: () {},
+                                          child: Text(
+                                            "Shop now",
+                                            style: TextStyle(
+                                                color: MColors.iconDark),
+                                          ))
+                                    ]),
+                              ),
+                            ]),
+                          ),
+                          SizedBox(height: Constants.spaceBtwItems / 2),
+                          //3) smooth page indicator
+                          Container(
+                              width: screenSize.width,
+                              padding: EdgeInsets.only(
+                                  left: screenSize.width / 2 - 15),
+                              child: SmoothIndicator(
+                                  effect: ScrollingDotsEffect(
+                                      dotWidth: 12,
+                                      dotHeight: 12,
+                                      activeDotColor: MColors.primary,
+                                      dotColor: Color(0xffE0E0E0)),
+                                  offset: 0,
+                                  count: 3,
+                                  size: Size(0, 0)))
+                        ]),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+            return Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              color: Color(0xffF7F7F9), //Color(0xffF7F7F9)
+              child: Column(children: [Text("data")]),
+            );
+          }, childCount: 1))
+        ]),
+      ),
       bottomNavigationBar: MBottomNavigationBar(screenSize: screenSize),
     );
   }
 }
 
 // SingleChildScrollView(
-        // child: Container(
-        //   width: screenSize.width,
-        //   height: screenSize.height,
-        //   color: Color(0xffF7F7F9), //Color(0xffF7F7F9)
-        //   child: Column(children: []),
-        // ),
-//       )
+//             child: Column(
+//               children: [
+//                 Container(
+//                   height: 100,
+//                   color: Colors.red,
+//                 ),
+//                 Container(
+//                   height: 240,
+//                   color: Colors.black,
+//                 ),
+//               ],
+//             ),
+//           ),

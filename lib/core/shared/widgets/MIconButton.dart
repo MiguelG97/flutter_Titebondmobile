@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:mobile/core/theme/colors.dart';
 
 // ignore: must_be_immutable
 class MIconButton extends StatelessWidget {
@@ -15,7 +16,7 @@ class MIconButton extends StatelessWidget {
       required this.icon,
       required this.iconCallBack,
       this.iconColor = const Color(0xff707B81),
-      this.activeIconColor = const Color(0xff0D6EFD),
+      this.activeIconColor = const Color(0xffffcc06),
       this.bgColor = const Color(0xffffffff),
       this.isActive = false});
 
@@ -26,7 +27,13 @@ class MIconButton extends StatelessWidget {
           color: bgColor, borderRadius: BorderRadius.circular(30)),
       child: IconButton(
         onPressed: iconCallBack,
-        icon: Icon(icon, color: isActive ? activeIconColor : iconColor),
+        icon: Icon(
+          icon,
+          color: isActive ? activeIconColor : iconColor,
+          // size: 25,
+          fill: isActive ? 1 : 0,
+          opticalSize: 1,
+        ),
       ),
     );
   }
