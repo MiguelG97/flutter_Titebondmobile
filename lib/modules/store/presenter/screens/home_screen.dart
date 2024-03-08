@@ -26,12 +26,12 @@ class _HomeScreenState extends State<HomeScreen> {
           SliverAppBar(
             // clipBehavior: Clip.none,
             primary: true,
-            floating: true,
+            floating: false,
             collapsedHeight: 80,
             toolbarHeight: 80,
             backgroundColor: MColors.secondary_100,
             pinned: true,
-            expandedHeight: 420,
+            expandedHeight: 430,
             elevation: 0,
             leading: IconButton(
                 onPressed: () {},
@@ -170,7 +170,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       dotColor: Color(0xffE0E0E0)),
                                   offset: 0,
                                   count: 3,
-                                  size: Size(0, 0)))
+                                  size: Size(0, 0))),
+                          const SizedBox(
+                            height: 10,
+                          )
                         ]),
                   ),
                 ),
@@ -230,6 +233,106 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         },
                         itemCount: Constants.productCategories.length,
+                      ),
+                    ),
+                    SizedBox(height: Constants.spaceBtwItems),
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisExtent: 201,
+                            crossAxisSpacing: Constants.spaceBtwItems * 1,
+                            mainAxisSpacing: Constants.spaceBtwItems),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.only(left: 20, right: 20),
+                            // width: 157,
+                            // height: 201,
+                            decoration: BoxDecoration(
+                              color: MColors.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Stack(clipBehavior: Clip.none, children: [
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    width: double.infinity,
+                                    height: 97,
+                                    child: Image(
+                                      fit: BoxFit.contain,
+                                      image: NetworkImage(
+                                          "http://imagecenter.titebond.com/Woodworking/TBOriginal/TB%20Original%2032oz.jpg"),
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Best Seller",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xff1372fd)),
+                                      ),
+                                      SizedBox(
+                                        height: Constants.spaceBtwItems / 10,
+                                      ),
+                                      Text(
+                                        "Nike Jordan",
+                                        style: GoogleFonts.raleway(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: MColors.iconDark_100,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: Constants.spaceBtwItems / 4,
+                                      ),
+                                      Text(
+                                        "\$752.00",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14,
+                                            color: MColors.iconDark,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                              Positioned(
+                                right: -20,
+                                bottom: 0,
+                                child: Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: BoxDecoration(
+                                    color: MColors.bluePrimay,
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      bottomRight: Radius.circular(8),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "+",
+                                      style: TextStyle(
+                                          color: MColors.white,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ]),
+                          );
+                        },
                       ),
                     )
                   ]),
