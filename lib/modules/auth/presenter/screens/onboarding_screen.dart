@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
+import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_events.dart';
 import 'package:mobile/modules/auth/presenter/controllers/onboard_states.dart';
@@ -107,11 +108,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           count: Constants.onboardingPictures.length,
                           effect: ScrollingDotsEffect(
                               dotColor: Color(0xffe0e0e0),
-                              activeDotColor: Color(0xffffcc06)),
+                              activeDotColor: MColors.primary),
                         ),
                         SizedBox(
                           width: sizeScreen.width,
-                          child: FilledButton(
+                          child: ElevatedButton(
                             onPressed: () {
                               if (currentState.currentPageIndex ==
                                   Constants.onboardingTitles.length - 1) {
@@ -134,16 +135,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   duration: const Duration(milliseconds: 500),
                                   curve: Curves.easeInOut);
                             },
-                            child: Text(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              backgroundColor: MColors.primary,
+                            ),
+                            child: const Text(
                               "Next",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
                               ),
-                            ),
-                            style: FilledButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              backgroundColor: Color(0xffffcc06),
                             ),
                           ),
                         ),

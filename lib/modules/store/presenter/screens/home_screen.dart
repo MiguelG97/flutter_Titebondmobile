@@ -4,6 +4,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/presenter/widgets/BottomNavBar.dart';
+import 'package:mobile/modules/store/presenter/widgets/SearchBar.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -80,35 +81,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           //1) search bar
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: screenSize.width * 0.8,
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                      hintText: "Looking for glue",
-                                      prefixIcon: Icon(Symbols.search)),
-                                ),
-                              ),
-                              Container(
-                                height: 52,
-                                width: 52,
-                                decoration: BoxDecoration(
-                                    color: MColors.primary,
-                                    borderRadius: BorderRadius.circular(26)),
-                                child: IconButton(
-                                    onPressed: () {}, icon: Icon(Symbols.tune)),
-                              )
-                            ],
-                          ),
+                          MSearchBar(screenSize: screenSize),
 
                           SizedBox(
-                            height: Constants.spaceBtwItems / 2,
+                            height: Constants.spaceBtwItems / 1.5,
                           ),
 
-                          //2) carousel
-                          Container(
-                            color: Colors.green,
+                          //2) carousel (List.PageView!)
+                          SizedBox(
                             height: 220,
                             child: Stack(children: [
                               SizedBox(
@@ -119,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 25, vertical: 30),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
@@ -197,21 +177,75 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-            return Container(
+          SliverToBoxAdapter(
+              child: SizedBox(
+            height: Constants.spaceBtwItems / 2,
+          )),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               width: screenSize.width,
               height: screenSize.height,
               color: Color(0xffF7F7F9), //Color(0xffF7F7F9)
-              child: Column(children: [Text("data")]),
-            );
-          }, childCount: 1))
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Select Category",
+                      style: GoogleFonts.raleway(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: MColors.iconDark),
+                    ),
+                    SizedBox(height: Constants.spaceBtwItems / 2),
+                    SizedBox(
+                      height: 50,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: Chip(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                              label: SizedBox(
+                                  width: 100,
+                                  height: 40,
+                                  child: Center(
+                                      child: Text(
+                                    Constants.productCategories[index],
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: MColors.iconDark),
+                                  ))),
+                              backgroundColor:
+                                  index == 1 ? MColors.primary : MColors.white,
+                              color: MaterialStatePropertyAll<Color>(
+                                  MColors.white),
+                            ),
+                          );
+                        },
+                        itemCount: Constants.productCategories.length,
+                      ),
+                    )
+                  ]),
+            ),
+          ),
+          // SliverList(
+          //     delegate: SliverChildBuilderDelegate((context, index) {
+          //   return ;
+          // }, childCount: 1))
         ]),
       ),
       bottomNavigationBar: MBottomNavigationBar(screenSize: screenSize),
     );
   }
 }
+
 
 // SingleChildScrollView(
 //             child: Column(

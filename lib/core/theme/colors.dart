@@ -7,6 +7,7 @@ class MColors {
   static Color secondary_100 = Color(0xffF7F7F9);
   static Color white = Color(0xffFFFFFF);
   static Color iconDark = Color(0xff2B2B2B);
+  static Color iconDark_100 = Color(0xff6A6A6A);
   static Color bluePrimay = Color(0xff0D6EFD);
   //0D6EFD
 

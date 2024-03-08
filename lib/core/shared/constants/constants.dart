@@ -1,4 +1,6 @@
 class Constants {
+  Constants._();
+
   static List<String> onboardingPictures = [
     "assets/images/carpinterTB.jpg",
     "assets/images/carpintersTB.jpg",
@@ -17,4 +19,14 @@ class Constants {
 
   static double spaceBtwItems = 30;
   static double spaceBtwSections = 50;
+
+  static List<String> productCategories = [
+    "All products",
+    "Glue Woodworking",
+    "Flooring",
+    "Finger Joint",
+    "Wood Slabs",
+    "Deck Tile",
+    "Wall Panel"
+  ];
 }
