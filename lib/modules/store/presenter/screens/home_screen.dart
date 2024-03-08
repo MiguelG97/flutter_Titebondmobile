@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
             toolbarHeight: 80,
             backgroundColor: MColors.secondary_100,
             pinned: true,
-            expandedHeight: 400,
+            expandedHeight: 420,
             elevation: 0,
             leading: IconButton(
                 onPressed: () {},
@@ -80,10 +80,32 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           //1) search bar
-                          Text(
-                            "search bar",
-                            style: TextStyle(color: Colors.black),
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: screenSize.width * 0.8,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                      hintText: "Looking for glue",
+                                      prefixIcon: Icon(Symbols.search)),
+                                ),
+                              ),
+                              Container(
+                                height: 52,
+                                width: 52,
+                                decoration: BoxDecoration(
+                                    color: MColors.primary,
+                                    borderRadius: BorderRadius.circular(26)),
+                                child: IconButton(
+                                    onPressed: () {}, icon: Icon(Symbols.tune)),
+                              )
+                            ],
                           ),
+
+                          SizedBox(
+                            height: Constants.spaceBtwItems / 2,
+                          ),
+
                           //2) carousel
                           Container(
                             color: Colors.green,
