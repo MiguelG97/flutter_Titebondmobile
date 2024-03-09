@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
-import 'package:mobile/modules/store/presenter/screens/home_screen.dart';
+import 'package:mobile/modules/store/presenter/home/home_screen.dart';
 
 class LogginForm extends StatelessWidget {
   LogginForm({

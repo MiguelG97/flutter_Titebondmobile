@@ -3,7 +3,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/shared/widgets/MIconButton.dart';
 import 'package:mobile/core/theme/colors.dart';
-import 'package:mobile/modules/store/presenter/widgets/BottomNavigation_Clipper.dart';
+import 'package:mobile/modules/store/presenter/home/widgets/BottomNavigation_Clipper.dart';
 
 class MBottomNavigationBar extends StatelessWidget {
   const MBottomNavigationBar({
@@ -15,7 +15,9 @@ class MBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      // clipBehavior: Clip.none,
+      // color: Colors.transparent,
       height: 110,
       child: Column(
         children: [
