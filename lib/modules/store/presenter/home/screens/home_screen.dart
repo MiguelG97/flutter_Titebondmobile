@@ -8,6 +8,7 @@ import 'package:mobile/modules/store/presenter/home/widgets/CategoryChips.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/MCarousel.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/ProductCard.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/SearchBar.dart';
+import 'package:mobile/modules/store/presenter/product/screen/product_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -141,9 +142,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSpacing: Constants.spaceBtwItems,
               ),
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: MProductCard(),
+                return GestureDetector(
+                  onTap: () {
+                    print("next page for a product");
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ProductScreen();
+                        },
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: MProductCard(),
+                  ),
                 );
               },
             )

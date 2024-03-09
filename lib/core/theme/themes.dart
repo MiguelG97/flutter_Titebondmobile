@@ -6,14 +6,20 @@ class MThemes {
   MThemes._();
   static ThemeData lightTheme = ThemeData(
     textTheme: TextTheme(
-      titleLarge: GoogleFonts.raleway(
-        fontSize: 32,
-        fontWeight: FontWeight.w700,
-        color: MColors.titleLarge,
-      ),
-      titleSmall: GoogleFonts.raleway(
-          fontSize: 16, fontWeight: FontWeight.w500, color: MColors.titleSmall),
-    ),
+        titleLarge: GoogleFonts.raleway(
+          fontSize: 32,
+          fontWeight: FontWeight.w700,
+          color: MColors.titleLarge,
+        ),
+        titleSmall: GoogleFonts.raleway(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: MColors.titleSmall),
+        headlineSmall: GoogleFonts.raleway(
+          fontSize: 16,
+          color: MColors.iconDark,
+          fontWeight: FontWeight.w600,
+        )),
   );
   static ThemeData darkTheme = ThemeData();
 }
