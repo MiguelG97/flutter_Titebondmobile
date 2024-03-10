@@ -41,6 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           print(currentState.currentPageIndex);
 
           return Scaffold(
+            backgroundColor: MColors.white,
             body: Column(
               children: [
                 ClipPath(
@@ -87,9 +88,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             style: TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xff404040)),
+                                color: MColors.dark_200),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(
@@ -137,7 +138,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(13)),
+                                  borderRadius: BorderRadius.circular(20)),
                               padding: const EdgeInsets.symmetric(vertical: 15),
                               backgroundColor: MColors.primary,
                             ),

@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(
                     Symbols.menu,
                     size: 25,
-                    color: MColors.iconDark,
+                    color: MColors.dark_100,
                   )),
               centerTitle: true,
               title: Image.asset("assets/logo/TITEBOND-02-gkl.png",
@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: Icon(
                             Icons.shopping_bag,
                             fill: 1,
-                            color: MColors.iconDark,
+                            color: MColors.dark_100,
                           )),
                     ),
                   ),
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: GoogleFonts.raleway(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
-                            color: MColors.iconDark),
+                            color: MColors.dark_100),
                       ),
                       SizedBox(height: Constants.spaceBtwItems / 2),
                       const MCategoryChips(),

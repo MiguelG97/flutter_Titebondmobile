@@ -33,14 +33,14 @@ class MSearchBar extends StatelessWidget {
                   hintStyle: GoogleFonts.poppins(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: MColors.iconDark_100),
+                      color: MColors.dark_300),
                   fillColor: MColors.white,
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
                       borderSide: BorderSide.none),
                   hintText: "Looking for glue",
-                  prefixIcon: Icon(Symbols.search, color: MColors.iconDark_100),
+                  prefixIcon: Icon(Symbols.search, color: MColors.dark_300),
                   prefixIconConstraints: BoxConstraints(minWidth: 50)),
             ),
           ),

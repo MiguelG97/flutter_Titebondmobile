@@ -34,7 +34,7 @@ class MCategoryChips extends StatelessWidget {
                       style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          color: MColors.iconDark),
+                          color: MColors.dark_100),
                     ))),
                 backgroundColor: index == 1 ? MColors.primary : MColors.white,
                 color: MaterialStatePropertyAll<Color>(MColors.white),

@@ -77,7 +77,7 @@ class CarouselScreen1 extends StatelessWidget {
             style: GoogleFonts.manrope(
                 fontSize: 21,
                 fontWeight: FontWeight.w700,
-                color: MColors.iconDark),
+                color: MColors.dark_100),
           ),
           SizedBox(
             height: Constants.spaceBtwItems / 6,
@@ -88,7 +88,7 @@ class CarouselScreen1 extends StatelessWidget {
             style: GoogleFonts.manrope(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                color: MColors.iconDark),
+                color: MColors.dark_100),
           ),
           SizedBox(
             height: Constants.spaceBtwItems / 2,
@@ -101,7 +101,7 @@ class CarouselScreen1 extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 "Shop now",
-                style: TextStyle(color: MColors.iconDark),
+                style: TextStyle(color: MColors.dark_100),
               ))
         ]),
       ),

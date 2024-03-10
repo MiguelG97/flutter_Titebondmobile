@@ -64,7 +64,7 @@ class MProductCard extends StatelessWidget {
                         style: GoogleFonts.raleway(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: MColors.iconDark_100,
+                          color: MColors.dark_300,
                         ),
                       ),
                       SizedBox(
@@ -74,7 +74,7 @@ class MProductCard extends StatelessWidget {
                         "\$752.00",
                         style: GoogleFonts.poppins(
                             fontSize: 14,
-                            color: MColors.iconDark,
+                            color: MColors.dark_100,
                             fontWeight: FontWeight.w500),
                       ),
                       SizedBox(

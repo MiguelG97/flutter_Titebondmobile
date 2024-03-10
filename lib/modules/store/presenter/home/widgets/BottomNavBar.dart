@@ -45,7 +45,7 @@ class MBottomNavigationBar extends StatelessWidget {
                     icon: Icon(
                       Symbols.shopping_bag,
                       size: 25,
-                      color: MColors.iconDark,
+                      color: MColors.dark_100,
                     ),
                   ),
                 ),
