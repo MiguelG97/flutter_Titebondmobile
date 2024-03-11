@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
+import 'package:mobile/core/shared/widgets/MAppbarNav.dart';
 import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/presenter/product/widgets/BottomNavBar.dart';
 
@@ -15,63 +16,15 @@ class ProductScreen extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: MColors.secondary_100,
-      appBar: AppBar(
-        elevation: 0,
+      appBar: MAppBarNav(
         toolbarHeight: toolbarHeight,
-        backgroundColor: Colors.transparent,
-        leadingWidth: 80,
-        leading: Padding(
-          padding:
-              const EdgeInsets.only(left: 20, top: 18, bottom: 18, right: 16),
-          child: Container(
-            height: 44,
-            width: 44,
-            decoration: BoxDecoration(
-              color: MColors.white,
-              borderRadius: BorderRadius.circular(40),
-            ),
-            child: Center(
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(
-                    Symbols.arrow_back_ios,
-                    color: MColors.dark_100,
-                    size: 14,
-                    grade: 200,
-                    fill: 1,
-                  )),
-            ),
-          ),
-        ),
-        title: Text(
-          "Product Name",
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-            child: Container(
-              width: 44,
-              decoration: BoxDecoration(
-                  color: MColors.white,
-                  borderRadius: BorderRadius.circular(40)),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Symbols.shopping_bag,
-                    color: MColors.dark_100,
-                    size: 24,
-                  )),
-            ),
-          )
-        ],
+        title: "Product Name",
+        showBag: true,
       ),
       body: SafeArea(
         child: Column(
           children: [
+            //1) content
             Expanded(
                 child: SizedBox(
               width: screenSize.width,
@@ -87,12 +40,14 @@ class ProductScreen extends StatelessWidget {
                       height: Constants.spaceBtwItems,
                     ),
                     Container(
-                      height: screenSize.height,
                       width: double.infinity,
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                           color: MColors.white,
-                          borderRadius: BorderRadius.circular(24),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            topRight: Radius.circular(24),
+                          ),
                           boxShadow: [
                             BoxShadow(
                               blurRadius: 42,
@@ -103,6 +58,7 @@ class ProductScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          //a) headers
                           Text(
                             "TITEBOND",
                             style: GoogleFonts.manrope(
@@ -160,6 +116,7 @@ class ProductScreen extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: Constants.spaceBtwItems / 2),
+                          //b) product presentation
                           Text(
                             "A minimalist glue product wthat provides the best joints to your wood products.",
                             style: GoogleFonts.manrope(
@@ -169,6 +126,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: Constants.spaceBtwItems / 2),
+                          //c) product description collapsable
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -191,17 +149,65 @@ class ProductScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          //hide or show it
-                          Column(
+                          Text(
+                            "Choose a stylish dark color or brighten up your home with colorful sarongs. The EKERÖ armchair has a sleek and modern look with two sides that meet at the back – and a waist support for added comfort!",
+                            style: GoogleFonts.manrope(
+                              fontSize: 14,
+                              color: MColors.dark_200,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: Constants.spaceBtwItems / 2),
+                          //d) product specification collapsable
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Choose a stylish dark color or brighten up your home with colorful sarongs. The EKERÖ armchair has a sleek and modern look with two sides that meet at the back – and a waist support for added comfort!",
+                                "Product Specifications",
                                 style: GoogleFonts.manrope(
-                                  fontSize: 14,
+                                  fontSize: 18,
                                   color: MColors.dark_200,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Symbols.expand_less,
+                                  color: MColors.dark_200,
+                                  weight: 700,
+                                  size: 32,
+                                ),
+                              )
+                            ],
+                          ),
+                          Table(
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                            border: TableBorder.all(
+                              color: Color(0xffe0e7e9),
+                            ),
+                            columnWidths: const {
+                              0: FlexColumnWidth(2),
+                              1: FlexColumnWidth(1),
+                            },
+                            children: [
+                              for (int i = 0; i < 5; i++)
+                                TableRow(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(left: 14),
+                                      alignment: Alignment.centerLeft,
+                                      height: 30,
+                                      color: const Color(0xffe0e7e9),
+                                      child: Text("Fuerza"),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 14),
+                                      child: Text("3,875 psi"),
+                                    )
+                                  ],
+                                ),
                             ],
                           )
                         ],
