@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^8.1.4
   google_fonts: ^5.1.0
   material_symbols_icons: ^4.2719.1
+  flutter_slidable: ^3.0.1
 
 dev_dependencies:
   flutter_test:
