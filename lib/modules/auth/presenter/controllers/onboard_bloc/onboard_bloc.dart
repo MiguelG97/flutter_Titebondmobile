@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/modules/auth/presenter/controllers/onboard_events.dart';
-import 'package:mobile/modules/auth/presenter/controllers/onboard_states.dart';
+import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc/onboard_events.dart';
+import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc/onboard_states.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc() : super(OnboardingCurrentState()) {

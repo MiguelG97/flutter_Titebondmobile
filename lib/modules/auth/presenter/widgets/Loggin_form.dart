@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -11,6 +12,9 @@ class LogginForm extends StatelessWidget {
   });
 
   static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +40,7 @@ class LogginForm extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 hintStyle: GoogleFonts.poppins(
@@ -73,6 +78,7 @@ class LogginForm extends StatelessWidget {
               height: 6,
             ),
             TextFormField(
+              controller: passController,
               keyboardType: TextInputType.visiblePassword,
               obscureText: true, //for password!
               decoration: InputDecoration(
@@ -121,26 +127,29 @@ class LogginForm extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) {
-                        return HomeScreen();
-                      },
-                    ));
+                  onPressed: () async {
+                    try {
+                      UserCredential userCred = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passController.text);
+                    } catch (e) {
+                      print(e);
+                    }
                   },
-                  child: Text(
-                    "Sign in",
-                    style: GoogleFonts.raleway(
-                        color: MColors.titleLarge,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
-                  ),
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     backgroundColor: MColors.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
+                  ),
+                  child: Text(
+                    "Sign in",
+                    style: GoogleFonts.raleway(
+                        color: MColors.titleLarge,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
                   ),
                 )),
             SizedBox(
@@ -156,7 +165,7 @@ class LogginForm extends StatelessWidget {
                 children: [
                   Positioned(
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         border: Border(
                           top: BorderSide(color: Color(0xffC2C2C2), width: 1),
                         ),
@@ -169,7 +178,7 @@ class LogginForm extends StatelessWidget {
                     child: Container(
                       color: Colors.white,
                       width: 50,
-                      child: Text(
+                      child: const Text(
                         "OR",
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Color(0xff404040)),
@@ -218,7 +227,20 @@ class LogginForm extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) {
+                        return const HomeScreen();
+                      },
+                    ));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: MColors.secondary_100,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -230,13 +252,6 @@ class LogginForm extends StatelessWidget {
                             fontWeight: FontWeight.w600),
                       ),
                     ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: MColors.secondary_100,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                    ),
                   ),
                 ))
           ],

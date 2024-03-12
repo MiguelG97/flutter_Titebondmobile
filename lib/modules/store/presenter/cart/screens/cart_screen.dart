@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/shared/widgets/MAppbarNav.dart';
 import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/presenter/cart/widgets/MItemCart.dart';
@@ -25,8 +26,15 @@ class CartScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ///missing overall paddin!
-                      MItemCart(screenSize: screenSize),
+                      for (int i = 0; i < 5; i++)
+                        Column(
+                          children: [
+                            MItemCart(screenSize: screenSize),
+                            SizedBox(
+                              height: Constants.spaceBtwItems / 2,
+                            )
+                          ],
+                        ),
                     ],
                   ),
                 ),

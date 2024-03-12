@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "656910214050",
+    "project_id": "fir-course-2dfdf",
+    "storage_bucket": "fir-course-2dfdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656910214050:android:8477e7f682cbf457a688fb",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656910214050-sj80er3ktai409vse5fp4lr6pauubahp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Jb__cRvbBudh5HgLxeXcDYKvd4igDB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656910214050-p5k2sfk156nt1cpcur3kkghgosinrk3f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "656910214050-q1ld4831e72qjpafae62soud9m701kuo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.titebondperu"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
