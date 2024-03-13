@@ -22,7 +22,7 @@ void main() async {
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final bool showOnbarding = prefs.getBool("showOnboarding") ?? true;
-
+  print(showOnbarding);
   runApp(App(
     showOnbarding: showOnbarding,
   ));
@@ -49,12 +49,12 @@ class App extends StatelessWidget {
           builder: (context, state) {
             User? user = FirebaseAuth.instance.currentUser;
             print(user);
-            if (showOnbarding) {
-              return OnboardingScreen();
+            if (!showOnbarding) {
+              return const OnboardingScreen();
             } else if (user == null) {
-              return Loggin_Screen();
+              return const Loggin_Screen();
             } else {
-              return HomeScreen();
+              return const HomeScreen();
             }
           },
         ),

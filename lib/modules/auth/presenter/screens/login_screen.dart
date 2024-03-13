@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
+import 'package:mobile/core/theme/colors.dart';
+import 'package:mobile/modules/auth/presenter/screens/register_screen.dart';
 import 'package:mobile/modules/auth/presenter/widgets/Loggin_form.dart';
 
 class Loggin_Screen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _Loggin_ScreenState extends State<Loggin_Screen> {
     Size sizeScreen = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Color(0xffFFFFFF),
+      backgroundColor: MColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.only(
@@ -25,35 +26,33 @@ class _Loggin_ScreenState extends State<Loggin_Screen> {
             right: 25,
           ),
           child: SizedBox(
-            height: sizeScreen.height * 0.96,
+            height: sizeScreen.height * 0.98,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: sizeScreen.height * 0.2,
+                SizedBox(
+                  height: sizeScreen.height * 0.25,
                   child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Hello Again!",
-                          style: Theme.of(context).textTheme.titleLarge,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Hello Again!",
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      SizedBox(height: Constants.spaceBtwItems / 3),
+                      SizedBox(
+                        width: sizeScreen.width / 2,
+                        child: Text(
+                          textAlign: TextAlign.center,
+                          "Fill your details Or continue with social media",
+                          style: Theme.of(context).textTheme.titleSmall,
+                          maxLines: 2,
                         ),
-                        SizedBox(height: Constants.spaceBtwItems / 3),
-                        SizedBox(
-                          width: sizeScreen.width / 2,
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            "Fill your details Or continue with social media",
-                            style: Theme.of(context).textTheme.titleSmall,
-                            maxLines: 2,
-                          ),
-                        )
-                      ]),
+                      ),
+                    ],
+                  ),
                 ),
 
-                // SizedBox(
-                //   height: Constants.spaceBtwSections,
-                // ),
                 LogginForm(),
 
                 //register as new user
@@ -63,17 +62,32 @@ class _Loggin_ScreenState extends State<Loggin_Screen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        RichText(
-                          text: TextSpan(children: [
-                            TextSpan(
-                              text: "New User? ",
-                              style: TextStyle(color: Color(0xff6A6A6A)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "New User? ",
+                              style: TextStyle(
+                                color: MColors.dark_300,
+                                fontSize: 16,
+                              ),
                             ),
-                            TextSpan(
-                              text: " Create Account",
-                              style: TextStyle(color: Color(0xff1A1D1E)),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => RegisterScreen(),
+                                ));
+                              },
+                              child: Text(
+                                "Create Account",
+                                style: GoogleFonts.raleway(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xff1A1D1E),
+                                ),
+                              ),
                             )
-                          ], style: TextStyle(fontSize: 16)),
+                          ],
                         )
                       ],
                     ),

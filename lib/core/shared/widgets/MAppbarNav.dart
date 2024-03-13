@@ -8,10 +8,12 @@ class MAppBarNav extends StatelessWidget implements PreferredSize {
       {super.key,
       required this.toolbarHeight,
       required this.title,
-      this.showBag = false});
+      this.showBag = false,
+      this.leadingBackgroundColor});
   final bool showBag;
   final double toolbarHeight;
   final String title;
+  final Color? leadingBackgroundColor;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -26,7 +28,7 @@ class MAppBarNav extends StatelessWidget implements PreferredSize {
           height: 44,
           width: 44,
           decoration: BoxDecoration(
-            color: MColors.white,
+            color: leadingBackgroundColor ?? MColors.white,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
@@ -38,8 +40,7 @@ class MAppBarNav extends StatelessWidget implements PreferredSize {
                   Symbols.arrow_back_ios,
                   color: MColors.dark_100,
                   size: 14,
-                  grade: 200,
-                  fill: 1,
+                  weight: 700,
                 )),
           ),
         ),
@@ -59,18 +60,19 @@ class MAppBarNav extends StatelessWidget implements PreferredSize {
                   color: MColors.white,
                   borderRadius: BorderRadius.circular(40)),
               child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const CartScreen(),
-                      ),
-                    );
-                  },
-                  icon: Icon(
-                    Symbols.shopping_bag,
-                    color: MColors.dark_100,
-                    size: 24,
-                  )),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const CartScreen(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Symbols.shopping_bag,
+                  color: MColors.dark_100,
+                  size: 24,
+                ),
+              ),
             ),
           )
       ],

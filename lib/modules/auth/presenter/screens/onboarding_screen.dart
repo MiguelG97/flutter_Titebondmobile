@@ -7,6 +7,7 @@ import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc/onboard_e
 import 'package:mobile/modules/auth/presenter/controllers/onboard_bloc/onboard_states.dart';
 import 'package:mobile/modules/auth/presenter/screens/login_screen.dart';
 import 'package:mobile/modules/auth/presenter/widgets/CustomClipper_Onboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -38,7 +39,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         builder: (context, state) {
           OnboardingCurrentState currentState = state as OnboardingCurrentState;
           OnboardingBloc bloc = context.read<OnboardingBloc>();
-          print(currentState.currentPageIndex);
 
           return Scaffold(
             backgroundColor: MColors.white,
@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Text(
                             Constants.onboardingSubtitles[
                                 currentState.currentPageIndex],
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff757575)),
@@ -108,23 +108,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           onDotClicked: (index) {},
                           count: Constants.onboardingPictures.length,
                           effect: ScrollingDotsEffect(
-                              dotColor: Color(0xffe0e0e0),
+                              dotColor: const Color(0xffe0e0e0),
                               activeDotColor: MColors.primary),
                         ),
                         SizedBox(
                           width: sizeScreen.width,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (currentState.currentPageIndex ==
                                   Constants.onboardingTitles.length - 1) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return Loggin_Screen();
+                                      return const Loggin_Screen();
                                     },
                                   ),
                                 );
+
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                final bool showOnbarding = await prefs.setBool(
+                                    "showOnboarding", false);
+
                                 return;
                               }
                               bloc.add(OnboardpageHasChanged(
