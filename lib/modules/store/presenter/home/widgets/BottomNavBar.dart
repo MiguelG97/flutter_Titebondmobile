@@ -7,15 +7,12 @@ import 'package:mobile/modules/store/presenter/cart/screens/cart_screen.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/BottomNavigation_Clipper.dart';
 
 class MBottomNavigationBar extends StatelessWidget {
-  const MBottomNavigationBar({
-    super.key,
-    required this.screenSize,
-  });
-
-  final Size screenSize;
+  const MBottomNavigationBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Container(
       // clipBehavior: Clip.none,
       // color: Colors.transparent,

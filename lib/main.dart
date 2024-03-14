@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mobile/core/theme/themes.dart';
 import 'package:mobile/modules/auth/presenter/controllers/auth_bloc/auth_bloc.dart';
@@ -13,6 +14,8 @@ import 'core/settings/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env");
+
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
@@ -49,7 +52,7 @@ class App extends StatelessWidget {
           builder: (context, state) {
             User? user = FirebaseAuth.instance.currentUser;
             print(user);
-            if (!showOnbarding) {
+            if (showOnbarding) {
               return const OnboardingScreen();
             } else if (user == null) {
               return const Loggin_Screen();

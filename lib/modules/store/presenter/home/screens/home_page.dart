@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
+import 'package:mobile/modules/store/data/models/product.dart';
+import 'package:mobile/modules/store/data/services/titebond_services.dart';
 import 'package:mobile/modules/store/presenter/cart/screens/cart_screen.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/CategoryChips.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/MCarousel.dart';
@@ -10,16 +12,24 @@ import 'package:mobile/modules/store/presenter/home/widgets/ProductCard.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/SearchBar.dart';
 import 'package:mobile/modules/store/presenter/product/screen/product_screen.dart';
 
-class MHomePage extends StatelessWidget {
-  const MHomePage({
-    super.key,
-    required this.screenSize,
-  });
+class MHomePage extends StatefulWidget {
+  const MHomePage({super.key});
 
-  final Size screenSize;
+  @override
+  State<MHomePage> createState() => _MHomePageState();
+}
+
+class _MHomePageState extends State<MHomePage> {
+  late Future<dynamic> _data;
+  @override
+  void initState() {
+    super.initState();
+    _data = TitebondapiService.getAllProduct();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
     return CustomScrollView(
       shrinkWrap: true,
       slivers: [
@@ -60,7 +70,7 @@ class MHomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => CartScreen(),
+                            builder: (context) => const CartScreen(),
                           ),
                         );
                       },
@@ -133,33 +143,49 @@ class MHomePage extends StatelessWidget {
             ]),
           ),
         ),
-        SliverGrid.builder(
-          itemCount: 8,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: 201,
-            crossAxisSpacing: Constants.spaceBtwItems / 8,
-            mainAxisSpacing: Constants.spaceBtwItems,
-          ),
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                print("next page for a product");
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return ProductScreen();
+        FutureBuilder(
+          future: _data,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                ///...
+              }
+              List<Product> products = List<Product>.from(snapshot.data);
+              return SliverGrid.builder(
+                itemCount: products.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisExtent: 201,
+                  crossAxisSpacing: Constants.spaceBtwItems / 8,
+                  mainAxisSpacing: Constants.spaceBtwItems,
+                ),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      // print("next page for a product");
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const ProductScreen();
+                          },
+                        ),
+                      );
                     },
-                  ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: MProductCard(),
-              ),
-            );
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: MProductCard(),
+                    ),
+                  );
+                },
+              );
+            } else {
+              return const SliverToBoxAdapter(
+                  //try with skeletons!!
+
+                  child: Center(child: CircularProgressIndicator()));
+            }
           },
-        )
+        ),
       ],
     );
   }
