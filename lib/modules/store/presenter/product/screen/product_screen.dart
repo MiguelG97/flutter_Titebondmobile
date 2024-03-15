@@ -1,14 +1,25 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/shared/widgets/MAppbarNav.dart';
 import 'package:mobile/core/theme/colors.dart';
+import 'package:mobile/modules/store/data/models/product.dart';
+import 'package:mobile/modules/store/data/models/sku.dart';
 import 'package:mobile/modules/store/presenter/product/widgets/BottomNavBar.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
-
+  const ProductScreen({
+    super.key,
+    required this.imageMemory,
+    required this.product,
+    required this.sku,
+  });
+  final Product product;
+  final SKU sku;
+  final Uint8List imageMemory;
   final double toolbarHeight = 80;
   final double bottombarHeight = 100;
   @override
@@ -18,7 +29,7 @@ class ProductScreen extends StatelessWidget {
       backgroundColor: MColors.secondary_100,
       appBar: MAppBarNav(
         toolbarHeight: toolbarHeight,
-        title: "Product Name",
+        title: product.name,
         showBag: true,
       ),
       body: SafeArea(
@@ -32,10 +43,11 @@ class ProductScreen extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Image.network(
-                        height: 260,
-                        fit: BoxFit.contain,
-                        "http://imagecenter.titebond.com/Woodworking/TBOriginal/TB%20Original%2032oz.jpg"),
+                    Image.memory(
+                      imageMemory,
+                      height: 260,
+                      fit: BoxFit.contain,
+                    ),
                     SizedBox(
                       height: Constants.spaceBtwItems,
                     ),
@@ -69,7 +81,7 @@ class ProductScreen extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "\$230.00",
+                                "\$${sku.price / 100}",
                                 style: GoogleFonts.manrope(
                                     fontSize: 32,
                                     fontWeight: FontWeight.w800,
@@ -118,7 +130,9 @@ class ProductScreen extends StatelessWidget {
                           SizedBox(height: Constants.spaceBtwItems / 2),
                           //b) product presentation
                           Text(
-                            "A minimalist glue product wthat provides the best joints to your wood products.",
+                            overflow: TextOverflow.fade,
+                            maxLines: 2,
+                            product.description,
                             style: GoogleFonts.manrope(
                               fontSize: 16,
                               color: MColors.dark_200,
@@ -150,7 +164,7 @@ class ProductScreen extends StatelessWidget {
                             ],
                           ),
                           Text(
-                            "Choose a stylish dark color or brighten up your home with colorful sarongs. The EKERÖ armchair has a sleek and modern look with two sides that meet at the back – and a waist support for added comfort!",
+                            product.description,
                             style: GoogleFonts.manrope(
                               fontSize: 14,
                               color: MColors.dark_200,
@@ -200,7 +214,7 @@ class ProductScreen extends StatelessWidget {
                                       alignment: Alignment.centerLeft,
                                       height: 30,
                                       color: const Color(0xffe0e7e9),
-                                      child: Text("Fuerza"),
+                                      child: Text(product.metadata ?? "Fuerza"),
                                     ),
                                     const Padding(
                                       padding: EdgeInsets.only(left: 14),

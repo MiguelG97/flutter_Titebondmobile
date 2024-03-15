@@ -1,3 +1,5 @@
+import 'package:mobile/core/shared/models/product_Chips.dart';
+
 class Constants {
   Constants._();
 
@@ -20,13 +22,10 @@ class Constants {
   static double spaceBtwItems = 30;
   static double spaceBtwSections = 50;
 
-  static List<String> productCategories = [
-    "All products",
-    "Glue Woodworking",
-    "Flooring",
-    "Finger Joint",
-    "Wood Slabs",
-    "Deck Tile",
-    "Wall Panel"
+  static List<Product_Chip> productCategories = [
+    Product_Chip(text: "All products", isActivate: true),
+    Product_Chip(text: "Original", isActivate: false),
+    Product_Chip(text: "Premium", isActivate: false),
+    Product_Chip(text: "Ultimate", isActivate: false),
   ];
 }

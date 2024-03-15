@@ -1,13 +1,21 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
+import 'package:mobile/modules/store/data/models/product.dart';
+import 'package:mobile/modules/store/data/models/sku.dart';
 
 class MProductCard extends StatelessWidget {
-  const MProductCard({
-    super.key,
-  });
-
+  const MProductCard(
+      {super.key,
+      required this.imageBytes,
+      required this.product,
+      required this.sku});
+  final Uint8List imageBytes;
+  final Product product;
+  final SKU sku;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,20 +45,20 @@ class MProductCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
+                  Container(
+                    padding: const EdgeInsets.only(top: 10),
                     width: 130,
                     height: 97,
                     child: Image(
                       fit: BoxFit.contain,
-                      image: NetworkImage(
-                          "http://imagecenter.titebond.com/Woodworking/TBOriginal/TB%20Original%2032oz.jpg"),
+                      image: MemoryImage(imageBytes),
                     ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Best Seller",
+                        "Titebond",
                         style: GoogleFonts.poppins(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -60,7 +68,12 @@ class MProductCard extends StatelessWidget {
                         height: Constants.spaceBtwItems / 10,
                       ),
                       Text(
-                        "Nike Jordan",
+                        product.name
+                            .toLowerCase()
+                            .replaceFirst(" iii", " III")
+                            .replaceFirst(" ii", " II")
+                            .replaceFirst(" i", " I")
+                            .replaceFirst("titebond ", ""),
                         style: GoogleFonts.raleway(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -71,7 +84,7 @@ class MProductCard extends StatelessWidget {
                         height: Constants.spaceBtwItems / 4,
                       ),
                       Text(
-                        "\$752.00",
+                        "\$${sku.price / 100}",
                         style: GoogleFonts.poppins(
                             fontSize: 14,
                             color: MColors.dark_100,

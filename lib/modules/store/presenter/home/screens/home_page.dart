@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mobile/core/shared/constants/constants.dart';
 import 'package:mobile/core/theme/colors.dart';
 import 'package:mobile/modules/store/data/models/product.dart';
+import 'package:mobile/modules/store/data/models/sku.dart';
 import 'package:mobile/modules/store/data/services/titebond_services.dart';
 import 'package:mobile/modules/store/presenter/cart/screens/cart_screen.dart';
 import 'package:mobile/modules/store/presenter/home/widgets/CategoryChips.dart';
@@ -151,8 +154,15 @@ class _MHomePageState extends State<MHomePage> {
                 ///...
               }
               List<Product> products = List<Product>.from(snapshot.data);
+              Map<Product, List<SKU>> mapSKU = {};
+              List<SKU> skus = [];
+              for (Product item in products) {
+                mapSKU[item] = item.skus;
+                skus.addAll(item.skus);
+              }
+
               return SliverGrid.builder(
-                itemCount: products.length,
+                itemCount: skus.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisExtent: 201,
@@ -160,20 +170,41 @@ class _MHomePageState extends State<MHomePage> {
                   mainAxisSpacing: Constants.spaceBtwItems,
                 ),
                 itemBuilder: (context, index) {
+                  SKU sku = skus[index];
+                  late Product productFound;
+                  mapSKU.forEach(
+                    (key, value) {
+                      try {
+                        SKU skufound = value.firstWhere((element) =>
+                            element.stripe_price_id == sku.stripe_price_id);
+                        productFound = key;
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  );
+
                   return GestureDetector(
                     onTap: () {
                       // print("next page for a product");
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return const ProductScreen();
+                            return ProductScreen(
+                              sku: sku,
+                              product: productFound,
+                              imageMemory: sku.imageData.asUint8List(),
+                            );
                           },
                         ),
                       );
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: MProductCard(),
+                      child: MProductCard(
+                          sku: sku,
+                          imageBytes: sku.imageData.asUint8List(),
+                          product: productFound),
                     ),
                   );
                 },
@@ -181,7 +212,6 @@ class _MHomePageState extends State<MHomePage> {
             } else {
               return const SliverToBoxAdapter(
                   //try with skeletons!!
-
                   child: Center(child: CircularProgressIndicator()));
             }
           },

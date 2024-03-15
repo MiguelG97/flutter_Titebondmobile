@@ -16,7 +16,7 @@ class Product {
         description = json["description"],
         stripe_product_id = json["stripe_product_id"],
         skuid = json["SKUid"],
-        metadata = json["metadata"],
+        metadata = json["metadata"], //check this info!!
         skus =
             List<SKU>.from((json["SKUS"]).map((e) => SKU.fromJson(e)).toList());
 }
