@@ -28,4 +28,13 @@ class Constants {
     Product_Chip(text: "Premium", isActivate: false),
     Product_Chip(text: "Ultimate", isActivate: false),
   ];
+
+  static Map<String, String> productTable = {
+    "Fuerza": "Fuerza",
+    "TiempoAbierto": "Tiempo abirto",
+    "TempMinima": "Temperatura mínima de aplicación",
+    "Viscosidad": "Viscosidad",
+    "usoExt": "Uso exterior",
+    "ResistAgua": "Resistencia al agua"
+  };
 }

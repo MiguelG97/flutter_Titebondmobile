@@ -152,6 +152,9 @@ class _MHomePageState extends State<MHomePage> {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
                 ///...
+                return SliverToBoxAdapter(
+                  child: Text(snapshot.error.toString()),
+                );
               }
               List<Product> products = List<Product>.from(snapshot.data);
               Map<Product, List<SKU>> mapSKU = {};

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mobile/modules/store/data/models/sku.dart';
 
 class Product {
@@ -6,7 +8,7 @@ class Product {
   final String? stripe_product_id;
   // final String? image_url;
   final List<dynamic> skuid;
-  final String? metadata;
+  final String metadata;
   final List<SKU> skus;
 
   Product(this.name, this.description, this.stripe_product_id, this.skuid,

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -25,6 +26,10 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    dynamic result = jsonDecode(product.metadata);
+    result = jsonDecode(result);
+    print(result);
+
     return Scaffold(
       backgroundColor: MColors.secondary_100,
       appBar: MAppBarNav(
@@ -72,7 +77,7 @@ class ProductScreen extends StatelessWidget {
                         children: [
                           //a) headers
                           Text(
-                            "TITEBOND",
+                            product.name,
                             style: GoogleFonts.manrope(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -199,26 +204,34 @@ class ProductScreen extends StatelessWidget {
                             defaultVerticalAlignment:
                                 TableCellVerticalAlignment.middle,
                             border: TableBorder.all(
-                              color: Color(0xffe0e7e9),
+                              color: const Color(0xffe0e7e9),
                             ),
                             columnWidths: const {
                               0: FlexColumnWidth(2),
                               1: FlexColumnWidth(1),
                             },
                             children: [
-                              for (int i = 0; i < 5; i++)
+                              for (int i = 0;
+                                  i < Constants.productTable.length;
+                                  i++)
                                 TableRow(
                                   children: [
                                     Container(
                                       padding: const EdgeInsets.only(left: 14),
                                       alignment: Alignment.centerLeft,
-                                      height: 30,
+                                      height: 40,
                                       color: const Color(0xffe0e7e9),
-                                      child: Text(product.metadata ?? "Fuerza"),
+                                      child: Text(Constants.productTable[
+                                          Constants.productTable.keys
+                                              .toList()[i]]!),
                                     ),
-                                    const Padding(
+                                    Padding(
                                       padding: EdgeInsets.only(left: 14),
-                                      child: Text("3,875 psi"),
+                                      child: Text(
+                                          result[Constants.productTable.keys
+                                              .toList()[i]],
+                                          maxLines: 2,
+                                          overflow: TextOverflow.fade),
                                     )
                                   ],
                                 ),
